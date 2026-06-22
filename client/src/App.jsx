@@ -10,6 +10,7 @@ import Experience from "./pages/admin/Experience";
 import Messages from "./pages/admin/Messages";
 
 import AdminLayout from "./layouts/AdminLayout";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -24,10 +25,14 @@ function App() {
         element={<Login />}
       />
 
-      {/* Admin Panel */}
+      {/* Protected Admin Panel */}
       <Route
         path="/admin"
-        element={<AdminLayout />}
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
       >
         <Route
           path="dashboard"

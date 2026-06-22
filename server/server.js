@@ -47,6 +47,8 @@ const projectRoutes = require("./routes/projectRoutes");
 const skillRoutes = require("./routes/skillRoutes");
 const experienceRoutes = require("./routes/experienceRoutes");
 const contactRoutes = require("./routes/contactRoute");
+const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 
@@ -54,11 +56,13 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
-
+app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/experience", experienceRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/admin", adminRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Portfolio Backend Running...");

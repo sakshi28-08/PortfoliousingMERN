@@ -1,17 +1,24 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 function AdminLayout() {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/admin/login");
+  };
+
   return (
     <div className="min-h-screen flex bg-slate-950 text-white">
 
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 p-6">
+      <aside className="w-64 bg-slate-900 p-6 flex flex-col">
 
         <h2 className="text-2xl font-bold mb-8">
           Admin Panel
         </h2>
 
-        <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col gap-4 flex-1">
 
           <Link
             to="/admin/dashboard"
@@ -47,8 +54,15 @@ function AdminLayout() {
           >
             Messages
           </Link>
-
         </nav>
+
+        {/* Logout Button */}
+        <button
+          onClick={logout}
+          className="mt-8 w-full bg-red-600 hover:bg-red-700 py-2 rounded-lg font-medium transition"
+        >
+          Logout
+        </button>
 
       </aside>
 
